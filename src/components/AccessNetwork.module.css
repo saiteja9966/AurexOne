@@ -1,0 +1,88 @@
+.section {
+  --network-gold: #d4af6a;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-top: 1px solid #d4af6a35;
+  background: #070807;
+  color: var(--network-gold);
+  padding: clamp(48px, 6vw, 88px) 24px 44px;
+}
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 0 0, #f6bc4e38, transparent 24%), radial-gradient(ellipse at 53% 52%, #caa25809, transparent 34%), linear-gradient(90deg, transparent, #070807 55%);
+}
+.city { position: absolute; inset: 0; z-index: -2; background: url('/images/accessBg.jpg') left center / cover; opacity: .17; filter: sepia(1) saturate(.8); mask-image: linear-gradient(90deg, #000, transparent 55%); }
+.roads { position: absolute; inset: 0; height: 100%; width: 100%; z-index: -1; stroke: #b68b3f; stroke-width: .8; opacity: .3; pointer-events: none; }
+.content { max-width: 1280px; margin: 0 auto; }
+.heading { text-align: center; }
+.eyebrow { font-family: 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: .48em; font-size: clamp(17px, 2.6vw, 32px); padding-left: .48em; line-height: 1.2; }
+.heading h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; text-transform: uppercase; letter-spacing: .045em; font-size: clamp(35px, 5.5vw, 72px); line-height: 1.15; background: linear-gradient(115deg, #b48435 5%, #f5dc9c 42%, #d4af6a 68%, #9d702d); background-clip: text; -webkit-text-fill-color: transparent; }
+.divider { display: flex; align-items: center; gap: 8px; max-width: 660px; margin: 4px auto 12px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #d4af6a95); }
+.divider::after { transform: rotate(180deg); }
+.divider span { font-size: 17px; line-height: 1; }
+.subtitle { color: #d8d5cc; font: 400 clamp(10px, 1.3vw, 15px)/1.6 Georgia, serif; letter-spacing: .075em; text-transform: uppercase; }
+.desktopNetwork { display: block; width: 100%; overflow: visible; margin-top: 20px; }
+.emblem { color: #d4af6a; }
+.ring { stroke: #dbb968; stroke-width: 1.2; fill: #080907e8; }
+.halo { fill: none; stroke: #d4af6a; stroke-width: 3; opacity: .18; filter: blur(9px); transform-box: fill-box; transform-origin: center; }
+.innerRing { fill: none; stroke: #c9a052; stroke-width: .4; opacity: .12; }
+.brand { font: 400 47px 'Cormorant Garamond', Georgia, serif; letter-spacing: 6px; fill: #e5c178; }
+.brandSub { font: 400 27px 'Cormorant Garamond', Georgia, serif; letter-spacing: 10px; transform: translateX(5px); fill: #e5c178; }
+.brandRule { fill: none; stroke: #d4af6a; stroke-width: .8; }
+.crownLight, .node { fill: #fff0c0; filter: drop-shadow(0 0 4px #ffc750) drop-shadow(0 0 9px #f2b640); }
+.connection { outline: none; }
+.connectionBase { stroke: #d4af6a; stroke-width: 1; opacity: .5; fill: none; }
+.connectionDraw { stroke: #dfbb71; stroke-width: 1.15; fill: none; }
+.connectionSpark { stroke: #ffedb9; stroke-width: 1.8; fill: none; stroke-dasharray: 5 300; stroke-dashoffset: 310; filter: drop-shadow(0 0 3px #ffc14d); opacity: 0; }
+.endpoint { fill: #10100b; stroke: #d4af6a; stroke-width: .8; }
+.iconCircle { fill: #090b08d9; stroke: #c6a25e; stroke-width: 1.1; transition: fill .3s, stroke .3s; }
+.icon { color: #dab666; }
+.placeName { fill: #dfddd5; font: 400 16px 'Cormorant Garamond', Georgia, serif; letter-spacing: .25px; }
+.travelTime { fill: #e2bb68; font-size: 17px; letter-spacing: .7px; }
+.destination { transition: filter .3s; }
+.connection:hover .destination, .connection:focus-visible .destination { filter: drop-shadow(0 0 8px #d4af6a60); }
+.connection:hover .iconCircle, .connection:focus-visible .iconCircle { fill: #d4af6a20; stroke: #ffe2a0; stroke-width: 2; }
+.connection:hover .connectionBase, .connection:focus-visible .connectionBase { opacity: 1; stroke-width: 2; }
+.bottomDivider { max-width: 780px; margin-top: 0; margin-bottom: 15px; }
+.tagline { text-align: center; text-transform: uppercase; font: 400 14px/1.7 'Cormorant Garamond', Georgia, serif; letter-spacing: .3em; }
+.mobileNetwork { display: none; }
+.revealed .heading { animation: rise 1s both; }
+.revealed .connectionDraw { animation: draw 1.7s cubic-bezier(.22, 1, .36, 1) var(--delay) both; }
+.revealed .destination { animation: rise 1s var(--delay) both; }
+.revealed .connectionSpark { opacity: .9; animation: travel 5s linear var(--travel-delay) infinite; }
+.revealed .halo { animation: breathe 5s ease-in-out infinite; }
+.revealed .crownLight { animation: glow 4s ease-in-out infinite; }
+.section[data-visible="false"] .connectionSpark, .section[data-visible="false"] .halo, .section[data-visible="false"] .crownLight { animation-play-state: paused; }
+@keyframes draw { from { stroke-dasharray: 1; stroke-dashoffset: 1; } to { stroke-dasharray: 1; stroke-dashoffset: 0; } }
+@keyframes travel { 0% { stroke-dashoffset: 310; opacity: 0; } 15% { opacity: .95; } 80% { opacity: .95; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes breathe { 0%, 100% { opacity: .13; transform: scale(.99); } 50% { opacity: .45; transform: scale(1.025); } }
+@keyframes glow { 0%, 100% { opacity: .6; } 50% { opacity: 1; } }
+@media (max-width: 700px) {
+  .section { padding: 48px 22px 38px; }
+  .desktopNetwork { display: none; }
+  .subtitle { max-width: 290px; margin: auto; font-size: 10px; letter-spacing: .09em; }
+  .divider { margin-top: 12px; }
+  .mobileNetwork { display: block; }
+  .mobileEmblem { width: 220px; height: 220px; margin: 28px auto 25px; display: block; overflow: visible; }
+  .mobileDestinations { position: relative; max-width: 460px; margin: auto; }
+  .mobileDestinations::before { content: ""; position: absolute; top: 0; bottom: 25px; left: 23px; width: 1px; background: linear-gradient(transparent, #d4af6a66 8%, #d4af6a66 90%, transparent); }
+  .mobileDestination { position: relative; display: grid; grid-template-columns: 47px 1fr auto; align-items: center; gap: 13px; padding: 11px 0; color: #ded9cd; }
+  .mobileIcon { width: 47px; height: 47px; display: grid; place-items: center; border: 1px solid #d4af6a80; border-radius: 50%; color: #d4af6a; background: #0b0c09; transition: background .3s; }
+  .mobileName { font: 400 16px/1.2 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: .035em; }
+  .mobileTime { color: #d4af6a; font: 400 13px Georgia, serif; white-space: nowrap; }
+  .mobileDestination:hover .mobileIcon { background: #d4af6a20; }
+  .revealed .mobileDestination { animation: rise .7s var(--delay) both; }
+  .bottomDivider { margin-top: 30px; }
+  .tagline { max-width: 300px; margin: auto; font-size: 12px; letter-spacing: .22em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section *, .section *::before, .section *::after { animation: none !important; transition: none !important; }
+  .connectionSpark { display: none; }
+}

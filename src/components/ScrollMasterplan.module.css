@@ -1,0 +1,55 @@
+.scrollStage { position: relative; height: 280svh; scroll-margin-top: 88px; }
+.sticky { position: sticky; top: 88px; height: calc(100svh - 88px); display: flex; justify-content: center; align-items: center; padding: 14px 0 20px; }
+.figure { width: min(100%, calc((100svh - 246px) * 1920 / 1357)); margin: 0; }
+.map { position: relative; width: 100%; border: 1px solid #d4af6a50; border-radius: 2px; box-shadow: 0 12px 60px #0008; isolation: isolate; }
+.image { display: block; width: 100%; height: auto; }
+.markers { position: absolute; inset: 0; pointer-events: none; }
+.marker { position: absolute; width: 64px; height: 64px; transform: translate(-50%, -50%); opacity: 0; transition: opacity .45s ease; }
+.active { opacity: 1; }
+.target { position: absolute; inset: 15px; border: 1px solid #ffdf86; border-radius: 50%; background: #efb84420; box-shadow: 0 0 20px #ffc94e70, inset 0 0 14px #efb84430; }
+.dot { position: absolute; left: calc(50% - 3px); top: calc(50% - 3px); width: 6px; height: 6px; border-radius: 50%; background: #fff3c6; box-shadow: 0 0 10px #ffca50, 0 0 22px #ffca50; }
+.pulse { position: absolute; inset: 0; border: 1px solid #f7ce72; border-radius: 50%; opacity: 0; animation: radar 2.4s ease-out infinite; animation-play-state: paused; }
+.active .pulse { animation-play-state: running; }
+.secondPulse { animation-delay: 1.2s; }
+.cursorPosition { position: absolute; width: 38px; height: 46px; }
+.cursor { display: block; width: 100%; height: 100%; filter: drop-shadow(0 3px 3px #000) drop-shadow(0 0 9px #efba5799); transform-origin: 0 0; animation: point 2.4s ease-in-out infinite; }
+.caption { padding: 13px 2px 0; }
+.captionTop { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+.hint { color: #b5a585; text-transform: uppercase; font-size: 9px; letter-spacing: .18em; }
+.hint > span { display: inline-block; margin-left: 8px; color: #d4af6a; }
+.counter { font: 400 13px/1.1 monospace; letter-spacing: .15em; color: #e2c182; }
+.counter > span { color: #6c6353; }
+.stops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.stop { display: block; width: 100%; padding: 0 0 5px; text-align: left; color: #8d826d; background: transparent; border: 0; cursor: pointer; transition: color .3s; }
+.stopLine { display: block; height: 2px; width: 100%; background: #d4af6a26; margin-bottom: 8px; overflow: hidden; }
+.stopLine > span { display: block; height: 100%; background: #d4af6a; transform: scaleX(0); transform-origin: left; transition: transform .6s ease; }
+.selected { color: #f0d298; }
+.selected .stopLine > span { transform: scaleX(1); }
+.stop:hover { color: #f0d298; }
+.stopName { font: 400 clamp(13px, 1.6vw, 20px)/1.3 'Cormorant Garamond', Georgia, serif; letter-spacing: .025em; }
+.note { margin: 8px 0 0; font: italic 10px/1.5 monospace; color: #8f8166; }
+@keyframes radar { 0% { transform: scale(.3); opacity: .9; } 85%, 100% { transform: scale(1.45); opacity: 0; } }
+@keyframes point { 0%, 100% { transform: translate(0, 0) rotate(-4deg); } 50% { transform: translate(5px, 7px) rotate(2deg); } }
+@media (max-width: 700px) {
+  .scrollStage { height: 250svh; }
+  .sticky { top: 70px; height: calc(100svh - 138px); padding: 20px 0; }
+  .figure { width: min(100%, calc((100svh - 300px) * 1920 / 1357)); }
+  .marker { width: 46px; height: 46px; }
+  .target { inset: 12px; }
+  .cursorPosition { width: 25px; height: 31px; }
+  .stops { gap: 10px; }
+  .hint { font-size: 8px; letter-spacing: .1em; }
+  .counter { font-size: 11px; }
+  .note { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scrollStage { height: auto; }
+  .sticky { position: relative; top: auto; height: auto; padding: 0; }
+  .figure { width: 100%; }
+  .cursor, .pulse { animation: none; }
+  .pulse { display: none; }
+  .marker, .stop, .stopLine > span { transition: none; }
+  .hint { font-size: 0; }
+  .hint::before { content: 'Select a location to explore'; font-size: 9px; }
+  .hint > span { display: none; }
+}

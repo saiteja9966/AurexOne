@@ -1,0 +1,8 @@
+/* Accessibility additions preserve the reference site's visual design. */
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 100; background: #d4af6a; color: #050505; padding: 12px 20px; }
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 2px solid #d4af6a; outline-offset: 5px; }
+html { scroll-padding-top: 90px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
